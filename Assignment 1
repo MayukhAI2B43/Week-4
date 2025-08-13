@@ -1,0 +1,93 @@
+#PYTHON CODE :-
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+def insert_at_beginning(head, data):
+    new_node = Node(data)
+    new_node.next = head
+    if head:
+        head.prev = new_node
+    return new_node  # New head
+
+def print_dll(head):
+    while head:
+        print(head.data, end=" <-> ")
+        head = head.next
+    print("NULL")
+
+# Example
+head = None
+head = insert_at_beginning(head, 30)
+head = insert_at_beginning(head, 20)
+head = insert_at_beginning(head, 10)
+
+print("Doubly Linked List:")
+print_dll(head)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//C CODE :-
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+struct Node* insertAtBeginning(struct Node* head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = head;
+
+    if (head != NULL)
+        head->prev = newNode;
+
+    return newNode; // New head
+}
+
+void printDLL(struct Node* head) {
+    while (head != NULL) {
+        printf("%d <-> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    head = insertAtBeginning(head, 30);
+    head = insertAtBeginning(head, 20);
+    head = insertAtBeginning(head, 10);
+
+    printf("Doubly Linked List:\n");
+    printDLL(head);
+
+    return 0;
+}
