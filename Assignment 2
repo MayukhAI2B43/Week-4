@@ -1,0 +1,146 @@
+#PYTHON CODE :-
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+def reverse_dll(head):
+    temp = None
+    current = head
+
+    # Swap next and prev for all nodes
+    while current:
+        temp = current.prev
+        current.prev = current.next
+        current.next = temp
+        current = current.prev  # move to "next" in reversed list
+
+    # Update head
+    if temp:
+        head = temp.prev
+    return head
+
+def print_dll(head):
+    while head:
+        print(head.data, end=" <-> ")
+        head = head.next
+    print("NULL")
+
+# Example
+head = Node(10)
+node2 = Node(20)
+node3 = Node(30)
+head.next = node2
+node2.prev = head
+node2.next = node3
+node3.prev = node2
+
+print("Original DLL:")
+print_dll(head)
+
+head = reverse_dll(head)
+print("Reversed DLL:")
+print_dll(head)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//C CODE :-
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+struct Node* reverseDLL(struct Node* head) {
+    struct Node *temp = NULL, *current = head;
+
+    // Swap prev and next for all nodes
+    while (current != NULL) {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
+    }
+
+    // Before changing head, check for empty list
+    if (temp != NULL)
+        head = temp->prev;
+
+    return head;
+}
+
+void printDLL(struct Node* head) {
+    while (head != NULL) {
+        printf("%d <-> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->prev = NULL;
+    node->next = NULL;
+    return node;
+}
+
+int main() {
+    struct Node* head = newNode(10);
+    struct Node* second = newNode(20);
+    struct Node* third = newNode(30);
+
+    head->next = second;
+    second->prev = head;
+    second->next = third;
+    third->prev = second;
+
+    printf("Original DLL:\n");
+    printDLL(head);
+
+    head = reverseDLL(head);
+
+    printf("Reversed DLL:\n");
+    printDLL(head);
+
+    return 0;
+}
